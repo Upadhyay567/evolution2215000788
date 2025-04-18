@@ -1,0 +1,30 @@
+// src/pages/Analytics.js  
+import React, { useEffect, useState } from 'react';  
+import Dashboard from '../components/Dashboard';  
+import Chart from '../components/Chart';  
+import axios from 'axios';  
+
+const Analytics = () => {  
+  const [data, setData] = useState(null);  
+  
+  useEffect(() => {  
+    // Fetching data stub for demo purposes  
+    const fetchData = async () => {  
+      // Replace with your API endpoint  
+      const response = await axios.get('/api/social-media-data');  
+      setData(response.data);  
+    };  
+    fetchData();  
+  }, []);  
+
+  if (!data) return <div>Loading...</div>;  
+
+  return (  
+    <div>  
+      <Dashboard data={data.dashboard} />  
+      <Chart data={data.chartData} />  
+    </div>  
+  );  
+};  
+
+export default Analytics;  
